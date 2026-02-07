@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Internet para Idosos</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Roboto,sans-serif;}
+body{background:#f2f5f8;color:#2c3e50;}
+header{background:linear-gradient(135deg,#6c63ff,#8e44ad);color:white;padding:20px;text-align:center;}
+
+.search-box{text-align:center;padding:20px;}
+.search-box input{
+  width:90%;
+  max-width:500px;
+  padding:12px;
+  border-radius:25px;
+  border:none;
+  font-size:1.1em;
+  box-shadow:0 4px 10px rgba(0,0,0,0.15);
+}
+
+section{
+  background:white;
+  margin:20px;
+  padding:20px;
+  border-radius:10px;
+  box-shadow:0 4px 10px rgba(0,0,0,0.1);
+}
+
+.card-button{
+  background:#1abc9c;
+  color:white;
+  border:none;
+  padding:10px;
+  border-radius:6px;
+  margin:5px 0;
+  cursor:pointer;
+}
+
+.hidden{display:none;}
+img{max-width:100%;border-radius:8px;margin-top:10px;}
+
+.curiosidades{
+  display:flex;
+  gap:15px;
+  overflow:hidden;
+}
+
+.curiosidade{
+  min-width:220px;
+  background:#ecf0f1;
+  padding:10px;
+  border-radius:8px;
+}
+
+footer{
+  background:#2c3e50;
+  color:white;
+  text-align:center;
+  padding:15px;
+  margin-top:20px;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<h1>Internet para Idosos</h1>
+<p>Guia simples de tecnologia e bem-estar</p>
+</header>
+
+<div class="search-box">
+<input type="text" id="search" placeholder="Digite: whatsapp, alimentação, exercício..." onkeyup="searchTopic(event)">
+</div>
+
+<section id="resultado" class="hidden">
+<h2>Resultado</h2>
+<p id="texto"></p>
+<img id="imagem">
+</section>
+
+<!-- DICAS -->
+<section>
+<h2>Dicas</h2>
+
+<button class="card-button" onclick="toggle('w')">WhatsApp</button>
+<div id="w" class="hidden">
+<p>Ajuda idosos a manter contato com família e amigos.</p>
+<img src="https://images.unsplash.com/photo-1581579185169-1b2b7c2e0f7c">
+</div>
+
+<button class="card-button" onclick="toggle('a')">Alimentação</button>
+<div id="a" class="hidden">
+<p>Frutas e verduras fortalecem a saúde e a imunidade.</p>
+<img src="https://images.unsplash.com/photo-1505576399279-565b52d4ac71">
+</div>
+
+<button class="card-button" onclick="toggle('e')">Exercícios</button>
+<div id="e" class="hidden">
+<p>Caminhadas e alongamentos ajudam equilíbrio e força.</p>
+<img src="https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b">
+</div>
+
+<button class="card-button" onclick="toggle('eco')">Economia</button>
+<div id="eco" class="hidden">
+<p>Organizar gastos evita estresse financeiro.</p>
+<img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d">
+</div>
+
+</section>
+
+<!-- CURIOSIDADES -->
+<section>
+<h2>Curiosidades</h2>
+
+<div class="curiosidades" id="carrossel">
+
+<div class="curiosidade">
+<img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2">
+<p>Idosos que usam tecnologia mantêm o cérebro ativo.</p>
+</div>
+
+<div class="curiosidade">
+<img src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e">
+<p>Leitura diária ajuda a memória.</p>
+</div>
+
+<div class="curiosidade">
+<img src="https://images.unsplash.com/photo-1516302752625-fcc3c50ae61f">
+<p>Conversar com amigos melhora o humor.</p>
+</div>
+
+<div class="curiosidade">
+<img src="https://images.unsplash.com/photo-1506126613408-eca07ce68773">
+<p>Alongamentos reduzem dores musculares.</p>
+</div>
+
+</div>
+
+<button onclick="rolar()">Ver mais</button>
+
+</section>
+
+<footer>
+<p>© 2026 – Internet para Idosos</p>
+</footer>
+
+<script>
+function toggle(id){
+ document.getElementById(id).classList.toggle("hidden");
+}
+
+function rolar(){
+ document.getElementById("carrossel").scrollBy({
+  left:250,
+  behavior:"smooth"
+ });
+}
+
+const dados={
+ whatsapp:{
+  t:"Usar WhatsApp ajuda a reduzir a solidão.",
+  i:"https://images.unsplash.com/photo-1581579185169-1b2b7c2e0f7c"
+ },
+ alimentação:{
+  t:"Boa alimentação fortalece o corpo.",
+  i:"https://images.unsplash.com/photo-1505576399279-565b52d4ac71"
+ },
+ exercício:{
+  t:"Exercícios leves melhoram equilíbrio.",
+  i:"https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b"
+ },
+ economia:{
+  t:"Planejar gastos traz tranquilidade.",
+  i:"https://images.unsplash.com/photo-1556742049-0cfed4f6a45d"
+ }
+};
+
+function searchTopic(e){
+ if(e.key!=="Enter") return;
+ let q=e.target.value.toLowerCase().trim();
+
+ if(dados[q]){
+  document.getElementById("resultado").classList.remove("hidden");
+  document.getElementById("texto").textContent=dados[q].t;
+  document.getElementById("imagem").src=dados[q].i;
+ }else{
+  alert("Tópico não encontrado");
+ }
+}
+</script>
+
+</body>
+</html>
